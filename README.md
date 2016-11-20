@@ -1,47 +1,36 @@
-# Keycloak for Computer Science House
+# Keycloak cnfigured fro reverse proxy with Mysql db
 
-Extends the Keycloak docker image to use PostgreSQL and allow reverse proxying, plus some additional tweaks for Computer Science House.
+Extends the Keycloak docker image to allow reverse proxying on port 8443.
 
 ## Usage
 
 ### Start an instance
 
-Start a Keycloak instance:
+Start a Mysql instance:
 
-    docker run --name keycloak computersciencehouse/keycloak
+     docker run --name mysql -e MYSQL_DATABASE=keycloak -e MYSQL_USER=keycloak -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=root_password -d mysql
 
-### Environment Variables
+### Start a Keycloak instance
 
-When starting the Keycloak instance you can pass a number of environment variables to configure how it connects to PostgreSQL. For example:
+Start a Keycloak instance and connect to the MySQL instance:
 
-    docker run --name keycloak -e POSTGRES_PORT_5432_TCP_ADDR=postgres.mycompany.com -e POSTGRES_DATABASE=keycloak -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD=password computersciencehouse/keycloak
+    docker run --name keycloak --link mysql:mysql jboss/keycloak-mysql
 
-##### KEYCLOAK_USER
+### Environment variables
 
-Specify the initial admin user to create.
+When starting the Keycloak instance you can pass a number of environment variables to configure how it connects to MySQL. For example:
 
-##### KEYCLOAK_PASSWORD
+    docker run --name keycloak --link mysql:mysql -e MYSQL_DATABASE=keycloak -e MYSQL_USERNAME=keycloak -e MYSQL_PASSWORD=password jboss/keycloak-mysql
 
-Specify the initial admin user's password.
+#### MYSQL_DATABASE
 
-##### POSTGRES\_PORT\_5432\_TCP\_ADDR
+Specify name of MySQL database (optional, default is `keycloak`).
 
-Specify the hostname of the PostgreSQL server.
+#### MYSQL_USER
 
-##### POSTGRES\_PORT\_5432\_TCP\_PORT
+Specify user for MySQL database (optional, default is `keycloak`).
 
-Specify the port of the PostgreSQL server (optional, default is `5432`).
+#### MYSQL_PASSWORD
 
-##### POSTGRES_DATABASE
-
-Specify the name of the PostgreSQL database (optional, default is `keycloak`).
-
-##### POSTGRES_USER
-
-Specify the user for the PostgreSQL database (optional, default is `keycloak`).
-
-##### POSTGRES_PASSWORD
-
-Specify the password for the PostgreSQL database (optional, default is `password`).
-
+Specify password for MySQL database (optional, default is `keycloak`).
 
