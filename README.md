@@ -1,4 +1,4 @@
-# Keycloak cnfigured for reverse proxy with Mysql db
+# Keycloak configured for reverse proxy with Mysql db
 
 Extends the Keycloak docker image to allow reverse proxying on port 8443.
 
