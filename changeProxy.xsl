@@ -21,7 +21,7 @@
 	<!-- Enable SSL on a Reverse Proxy -->
     <xsl:template xmlns:dm="urn:jboss:domain:4.0" match="//dm:server/dm:socket-binding-group/dm:socket-binding[@name='https']/@port">
 		<xsl:attribute name="port">
-			<xsl:text>${jboss.https.port:443}</xsl:text>
+			<xsl:text>${jboss.https.port:8443}</xsl:text>
 		</xsl:attribute>
     </xsl:template>
 
