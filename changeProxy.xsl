@@ -18,17 +18,17 @@
 		</http-listener>
     </xsl:template>
 
-	<!-- Enable SSL on a Reverse Proxy -->
+	<!-- Enable SSL on a Reverse Proxy 
     <xsl:template xmlns:dm="urn:jboss:domain:4.0" match="//dm:server/dm:socket-binding-group/dm:socket-binding[@name='https']/@port">
 		<xsl:attribute name="port">
 			<xsl:text>${jboss.https.port:8443}</xsl:text>
 		</xsl:attribute>
     </xsl:template>
 
-	<!-- Bind Keycloak to the ROOT context -->
+	<!-- Bind Keycloak to the ROOT context 
     <xsl:template xmlns="urn:jboss:domain:undertow:3.0" xmlns:ut="urn:jboss:domain:undertow:3.0" match="//ut:subsystem/ut:server/ut:host">
 		<host default-web-module="keycloak-server.war">
 			<xsl:apply-templates select="@*|node()"/>
 		</host>
-    </xsl:template>
+    </xsl:template> -->
 </xsl:stylesheet>
